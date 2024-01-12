@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace _2023_GC_A2_Partiel_POO.Level_2
 {
@@ -39,7 +40,7 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         /// <summary>
         /// HP actuel du personnage
         /// </summary>
-        public int CurrentHealth { get; private set; }
+        public int CurrentHealth { get => _baseHealth; private set=> _baseHealth=value; }
         public TYPE BaseType { get => _baseType;}
         /// <summary>
         /// HPMax, prendre en compte base et equipement potentiel
@@ -48,7 +49,7 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         {
             get
             {
-                throw new NotImplementedException();
+                return _baseHealth;
             }
         }
         /// <summary>
@@ -58,7 +59,7 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         {
             get
             {
-                throw new NotImplementedException();
+                return _baseAttack;
             }
         }
         /// <summary>
@@ -68,7 +69,7 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         {
             get
             {
-                throw new NotImplementedException();
+                return _baseDefense;
             }
         }
         /// <summary>
@@ -78,7 +79,7 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         {
             get
             {
-                throw new NotImplementedException();
+                return _baseSpeed;
             }
         }
         /// <summary>
@@ -91,6 +92,7 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         public StatusEffect CurrentStatus { get; private set; }
 
         public bool IsAlive => throw new NotImplementedException();
+
 
 
         /// <summary>
@@ -111,14 +113,25 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         /// <exception cref="ArgumentNullException">Si equipement est null</exception>
         public void Equip(Equipment newEquipment)
         {
-            throw new NotImplementedException();
+            CurrentEquipment = newEquipment;
+            MaxHealth += newEquipment.BonusHealth; 
+            Attack += newEquipment.BonusAttack;
+            Defense += newEquipment.BonusDefense;
+            Speed += newEquipment.BonusSpeed;
+            CurrentHealth = _baseHealth;
         }
+
+
         /// <summary>
         /// Desequipe l'objet en cours au personnage
         /// </summary>
         public void Unequip()
         {
-            throw new NotImplementedException();
+            CurrentEquipment = null;
+            MaxHealth = _baseHealth;
+            Attack = _baseAttack;
+            Defense = _baseDefense;
+            Speed = _baseSpeed;
         }
 
     }
